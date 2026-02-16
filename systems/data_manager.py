@@ -38,7 +38,6 @@ class DataManager:
         Devuelve un dict vacío si falla.
         """
         try:
-            # Usamos encoding='utf-8' para soportar acentos y 'ñ'
             with open(file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except FileNotFoundError:

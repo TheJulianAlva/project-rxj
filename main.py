@@ -17,7 +17,6 @@ def main():
     audio_manager = AudioManager.instance()
     # endregion
     
-    # Obtener información de la pantalla del usuario
     display_info = pygame.display.Info()
     screen_width = display_info.current_w
     screen_height = display_info.current_h
@@ -27,15 +26,14 @@ def main():
     desired_width = display_config.get("width", 1280)
     desired_height = display_config.get("height", 720)
     
-    # Ajustar automáticamente al tamaño de la pantalla si es necesario
     display_size = (
         min(desired_width, screen_width),
         min(desired_height, screen_height)
     )
     
-    # Log si se ajustó la resolución
     if display_size[0] != desired_width or display_size[1] != desired_height:
         print(f"Resolución ajustada: {desired_width}x{desired_height} -> {display_size[0]}x{display_size[1]}")
+    
     icono = pygame.image.load("assets/icon.png")
     pygame.display.set_icon(icono)
     pygame.display.set_mode(display_size, DOUBLEBUF | OPENGL)
