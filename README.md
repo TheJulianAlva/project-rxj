@@ -1,166 +1,170 @@
-# Proyecto RXJ
+# 🏰 The Mansion Riddle (Project RXJ)
 
-Un juego de puzzles y exploración en 3D inspirado en los clásicos del *survival horror*, construido desde cero con Python, PyGame y OpenGL.
+![Main Banner](assets/mansion-riddle-banner.png)
 
+> A retro 3D survival horror engine built from scratch with Python and OpenGL.
 
-### Técnicas
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)
+![PyGame](https://img.shields.io/badge/PyGame-2.0%2B-green?style=for-the-badge&logo=pygame)
+![OpenGL](https://img.shields.io/badge/OpenGL-Legacy-red?style=for-the-badge&logo=opengl)
+![Status](https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge)
 
-* **Renderizado 3D en Tiempo Real:** Utiliza PyOpenGL para renderizar la escena 3D.
-* **Modo Inmediato:** Todo el renderizado se basa en funciones clásicas de OpenGL (`glPushMatrix`, `glBegin`, etc.).
-* **Gestión de Escena Basada en Triggers:** El cambio de cámara se gestiona mediante volúmenes de disparo (triggers) invisibles que el jugador activa al moverse.
+## 📖 About the Project
 
-## 🛠️ Stack Tecnológico
+**The Mansion Riddle** is not just a game; it is a deep technical exploration of how classic *survival horror* games (like Resident Evil or Silent Hill) worked. This project implements a custom 3D engine that combines the versatility of **PyGame** for window and input management, with the low-level power of **PyOpenGL** for rendering.
 
-* **Lenguaje:** Python 3
-* **Ventana y Eventos:** [PyGame](https://www.pygame.org/news) (para el bucle principal, gestión de ventanas y eventos de input).
-* **Gráficos 3D:** [PyOpenGL](http://pyopengl.sourceforge.net/) (para todas las llamadas de renderizado 3D).
----
-## 🎮 Controles (Controles de Tanque)
+### ✨ Key Features
 
-* `W`: Moverse hacia adelante (en la dirección que mira el personaje).
-* `S`: Moverse hacia atrás.
-* `A`: Rotar (girar) a la izquierda.
-* `D`: Rotar (girar) a la derecha.
-* `E`: Interactuar (abrir puertas, examinar objetos).
-* `ESC`: Abrir menú de pausa.
----
-## 🏛️ Arquitectura y Patrones de Diseño
-
-El proyecto está estructurado siguiendo patrones de diseño robustos para mantener el código limpio, escalable y desacoplado.
-
-* **Programación Orientada a Objetos (OOP):** Cada entidad del juego (Jugador, Puerta, Puzzle) es una clase que gestiona su propio estado, lógica de actualización (`update()`) y renderizado (`draw()`).
-* **Máquina de Estados (State Machine):** Un `engine.py` gestiona el estado global del juego (ej. `MenuState`, `PlayState`, `PauseState`), asegurando que solo la lógica relevante esté activa.
-* **Patrón Singleton:** Se utiliza para los gestores globales que necesitan ser accesibles desde cualquier parte del código:
-    * `InputManager`: Centraliza todo el input del teclado/ratón y lo traduce a "acciones" (ej. "move_forward").
-    * `CameraManager`: Almacena todas las cámaras fijas (`Camera`) y gestiona cuál es la `active_camera`.
-* **Patrón Observer (Planeado):** Se usará para la lógica de los puzzles. Un `Puzzle` (Subject) notificará a una `Door` (Observer) cuando sea resuelto.
-
-### Estructura de Carpetas
-
-```
-Proyecto_RXJ/
-├── main.py
-├── engine.py             # Gestiona la máquina de estados
-│
-├── states/               # Estados del juego
-│   ├── base_state.py
-│   └── play_state.py
-│
-├── game_objects/         # Clases de objetos del mundo
-│   ├── player.py
-│   ├── camera.py
-│   └── trigger_volume.py
-│
-└── systems/              # Singletons globales
-    ├── input_manager.py
-    └── camera_manager.py
-```
-
-## 🚀 Instalación y Ejecución (Configuración Inicial)
-
-Esta guía es para configurar el proyecto en tu computadora por **primera vez**.
-
-1.  **Clona el repositorio:**
-    Abre tu terminal (Git Bash, Símbolo del sistema, etc.) y clona el proyecto en la carpeta que prefieras. Reemplaza `[URL_DEL_REPO]` con la URL SSH o HTTPS de GitHub.
-    ```bash
-    git clone [URL_DEL_REPO]
-    ```
----
-
-## 🤝 Flujo de Trabajo y Contribución (Git y GitHub)
-
-Esta es la guía **obligatoria** que todo miembro del equipo debe seguir para añadir código al proyecto.
-
-### Principio Fundamental: `main` está protegido
-
-La rama `main` es nuestra versión estable. **NUNCA trabajamos directamente en `main`**. Todo el trabajo se hace en ramas separadas y se integra mediante *Pull Requests*.
+*   **Native 3D Rendering:** Graphics pipeline implemented manually using OpenGL in Immediate Mode.
+*   **Fixed Camera System:** Mathematical implementation of cinematic perspective changes based on invisible *triggers*.
+*   **Tank Controls:** Faithful recreation of the classic control scheme that defines the genre.
+*   **Scalable Architecture:** Modular design based on State Machines and Design Patterns.
 
 ---
 
-### Paso 1: Crea tu Rama de Trabajo
+## 🛠️ Tech Stack
 
-Antes de escribir una sola línea de código, crea una rama nueva.
+This project demonstrates proficiency in software engineering and computer graphics:
 
-1.  **Sincroniza tu `main` local:**
-    Asegúrate de tener la versión más reciente del proyecto.
-    ```bash
-    git checkout main
-    git pull origin main
-    ```
+*   **Language:** Python 3
+*   **Core Loop & I/O:** [PyGame](https://www.pygame.org/news) (Window handling, delta time, keyboard/mouse inputs).
+*   **3D Graphics:** [PyOpenGL](http://pyopengl.sourceforge.net/) (Primitive rendering, projection and model-view matrix management).
+*   **Mathematics:** Extensive use of linear algebra for 3D transformations and camera calculations.
 
-2.  **Crea y múevete a tu nueva rama:**
-    Usa un nombre descriptivo para tu rama (ej. `feat/logica-jugador`, `fix/bug-colision`).
-    ```bash
-    git checkout -b nombre-de-tu-rama
-    ```
+---
 
-### Paso 2: Trabaja y Haz Commits (¡Patrón Obligatorio!)
+## 🏛️ Software Architecture
 
-Modifica el código, añade tus mejoras y guarda tu progreso con *commits*.
+The code follows **SOLID** principles and design patterns to ensure maintainability:
 
-1.  **Añade tus cambios:**
-    ```bash
-    git add .
-    ```
-
-2.  **Crea tu commit:**
-    Usaremos un patrón de "Commits Convencionales" para mantener el historial limpio. Escribe tus mensajes de commit así:
-    `tipo: [Descripción breve de lo que hiciste]`
-
-    **Tipos comunes:**
-    * **`feat:`** (Nueva característica. Ej: `feat: Implementa la clase Player y su movimiento`)
-    * **`fix:`** (Corrección de un bug. Ej: `fix: Arregla el cálculo de rotación del jugador`)
-    * **`docs:`** (Cambios en la documentación. Ej: `docs: Actualiza README con la guía de Git`)
-    * **`style:`** (Formato, punto y coma, etc. Ej: `style: Formatea player.py según PEP8`)
-    * **`refactor:`** (Cambios en el código que no añaden nada nuevo ni arreglan nada. Ej: `refactor: Mueve la lógica de dibujo del jugador a un método privado`)
-    * **`test:`** (Añadir o modificar pruebas).
-
-    **Comando de commit de ejemplo:**
-    ```bash
-    git commit -m "feat: Añade la clase TriggerVolume para los cambios de cámara"
-    ```
-
-### Paso 3: Sube tu Rama a GitHub
-
-Cuando hayas terminado tu trabajo (o quieras guardarlo en la nube), sube tu rama.
-```bash
-# La primera vez que subes la rama, usa '-u' para enlazarla
-git push -u origin nombre-de-tu-rama
-```
-Para subidas posteriores en la misma rama, solo necesitas:
-```bash
-git push
+### Simplified Class Diagram (Mermaid)
+```mermaid
+classDiagram
+    class GameEngine {
+        +state_stack
+        +push_state()
+        +pop_state()
+        +update()
+        +draw()
+    }
+    class BaseState {
+        <<Abstract>>
+        +update()
+        +draw()
+    }
+    class PlayState {
+        +player
+        +camera_manager
+    }
+    class MenuState
+    
+    GameEngine o-- BaseState : Manages
+    BaseState <|-- PlayState
+    BaseState <|-- MenuState
 ```
 
-### Paso 4: Crea un Pull Request (PR)
+### Patterns Used
+1.  **State Pattern:** `GameEngine` manages a stack of states (`PlayState`, `MenuState`, `PauseState`), allowing fluid transitions and encapsulated logic.
+2.  **Singleton:** Used in `InputManager` and `DataManager` to provide controlled global access to shared resources.
+3.  **Observer (Event System):** Decouples game *trigger* logic (like puzzles) from their effects (opening doors), allowing a flexible reactive system.
+4.  **Component/Object:** Game entities (`Player`, `Puzzle`) encapsulate their own logic and data.
 
-Aquí es donde pides que tu código se integre a `main`.
+---
 
-1.  Ve a la página del repositorio en **GitHub.com**.
-2.  GitHub detectará automáticamente tu rama nueva y te mostrará un botón: **"Compare & pull request"**. Haz clic en él.
-3.  **Rellena el PR:**
-    * **Título:** Un título claro (ej. "Implementación de la clase Player").
-    * **Descripción:** Explica **qué** hiciste, **por qué** y **cómo** pueden probarlo.
-    * **Reviewers:** Asigna a uno o más compañeros de equipo para que revisen tu código.
+## 🎮 Game Guide
 
-### Paso 5: Revisión y Merge
+### Controls (Tank Style)
+| Key | Action |
+| :---: | :--- |
+| **W** | Move Forward |
+| **S** | Move Backward |
+| **A** | Turn Left |
+| **D** | Turn Right |
+| **E** | Interact (Examine/Open) |
+| **ESC** | Pause / Menu |
 
-1.  **Aprobación:** Una vez que tu PR esté listo, haz clic en el botón **"Merge pull request"**.
-2.  ¡Felicidades! Tu código ahora es parte de la rama `main`.
+---
 
-### Paso 6: Limpieza y Sincronización
+## 🚀 Installation and Execution
 
-Después de que tu PR se haya integrado:
+Follow these steps to run the project locally.
 
-1.  Vuelve a tu `main` local y actualízalo.
+### Prerequisites
+*   Python 3.8 or higher installed.
+*   Git to clone the repository.
+
+### Step by Step
+
+1.  **Clone the repository**
     ```bash
-    git checkout main
-    git pull origin main
+    git clone https://github.com/TheJulianAlva/project-rxj.git
+    cd project-rxj
     ```
-2.  (Opcional) Borra tu rama antigua, ya no la necesitas.
+
+2.  **Create virtual environment (Recommended)**
     ```bash
-    git branch -d nombre-de-tu-rama
+    python -m venv venv
+    # On Windows:
+    .\venv\Scripts\activate
+    # On Mac/Linux:
+    source venv/bin/activate
+    ```
+
+3.  **Install dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Run the game**
+    ```bash
+    python main.py
     ```
 
 ---
+
+## 📂 Project Structure
+
+```
+project-rxj/
+├── main.py                 # Entry Point
+├── engine.py               # Engine Core (State Machines)
+├── assets/                 # Resources (Models, Textures, Sounds)
+├── data/                   # Configuration and levels (JSON)
+├── game_objects/           # Entities (Player, Puzzles, Cameras)
+├── state/                  # Game State Logic
+├── systems/                # Global Systems (Audio, Input, Triggers)
+└── utilities/              # Math tools and helpers
+```
+
+---
+
+## 🤝 Contribution
+
+Contributions are welcome under the **Feature Branch** workflow!
+
+1.  Fork the project.
+2.  Create a branch for your feature (`git checkout -b feature/AmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add: AmazingFeature'`).
+4.  Push to the branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
+
+---
+
+## 👥 Contributors
+
+This project was developed by a team:
+
+*   **[TheJulianAlva](https://github.com/TheJulianAlva)** - *Julián Alva*
+*   **[Rogelios100](https://github.com/Rogelios100)** - *Rodrigo Del Ángel*
+*   **[Ximenakdsk](https://github.com/Ximenakdsk)** - *Ximena Hernández*
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the `LICENSE` file for details.
+
+---
+
+*Developed as a final project for the Computer Graphics course.*
 
